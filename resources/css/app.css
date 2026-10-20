@@ -1,0 +1,247 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@layer base {
+    html {
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+        @apply bg-slate-50 text-slate-800 antialiased;
+    }
+}
+
+@layer components {
+    /* Sidebar */
+    .sidebar {
+        @apply fixed left-0 top-0 h-screen w-64 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white z-50 transition-transform duration-300 overflow-y-auto;
+    }
+
+    .sidebar-brand {
+        @apply flex items-center gap-3 px-6 py-5 border-b border-slate-700/50;
+    }
+
+    .sidebar-nav-item {
+        @apply flex items-center gap-3 px-6 py-3 text-sm text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-200 rounded-lg mx-3 my-0.5;
+    }
+
+    .sidebar-nav-item.active {
+        @apply bg-indigo-600/90 text-white shadow-lg shadow-indigo-500/20;
+    }
+
+    .sidebar-section-title {
+        @apply px-6 pt-5 pb-2 text-xs font-semibold text-slate-500 uppercase tracking-wider;
+    }
+
+    /* Cards */
+    .card {
+        @apply bg-white rounded-xl shadow-sm border border-slate-200/60 overflow-hidden;
+    }
+
+    .card-header {
+        @apply px-6 py-4 border-b border-slate-100 flex items-center justify-between;
+    }
+
+    .card-body {
+        @apply p-6;
+    }
+
+    /* Stats Card */
+    .stat-card {
+        @apply bg-white rounded-xl shadow-sm border border-slate-200/60 p-6 hover:shadow-md transition-shadow duration-300;
+    }
+
+    .stat-card .stat-icon {
+        @apply w-12 h-12 rounded-xl flex items-center justify-center;
+    }
+
+    .stat-card .stat-value {
+        @apply text-2xl font-bold text-slate-800 mt-3;
+    }
+
+    .stat-card .stat-label {
+        @apply text-sm text-slate-500 mt-1;
+    }
+
+    /* Buttons */
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+    }
+
+    .btn-primary {
+        @apply bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-indigo-500 shadow-sm;
+    }
+
+    .btn-secondary {
+        @apply bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 focus:ring-slate-500;
+    }
+
+    .btn-danger {
+        @apply bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 shadow-sm;
+    }
+
+    .btn-success {
+        @apply bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-emerald-500 shadow-sm;
+    }
+
+    .btn-warning {
+        @apply bg-amber-500 text-white hover:bg-amber-600 focus:ring-amber-500 shadow-sm;
+    }
+
+    .btn-sm {
+        @apply px-3 py-1.5 text-xs;
+    }
+
+    .btn-icon {
+        @apply p-2;
+    }
+
+    /* Form Elements */
+    .form-group {
+        @apply mb-5;
+    }
+
+    .form-label {
+        @apply block text-sm font-medium text-slate-700 mb-1.5;
+    }
+
+    .form-input {
+        @apply w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm text-slate-800 placeholder-slate-400
+               focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500
+               transition-all duration-200 bg-white;
+    }
+
+    .form-select {
+        @apply w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm text-slate-800
+               focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500
+               transition-all duration-200 bg-white appearance-none;
+    }
+
+    .form-textarea {
+        @apply w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm text-slate-800 placeholder-slate-400
+               focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500
+               transition-all duration-200 bg-white resize-y;
+    }
+
+    .form-error {
+        @apply text-xs text-red-600 mt-1;
+    }
+
+    /* Tables */
+    .data-table {
+        @apply w-full text-sm;
+    }
+
+    .data-table thead th {
+        @apply px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider bg-slate-50/80 border-b border-slate-200;
+    }
+
+    .data-table tbody td {
+        @apply px-4 py-3 border-b border-slate-100 text-slate-700;
+    }
+
+    .data-table tbody tr {
+        @apply hover:bg-indigo-50/40 transition-colors duration-150;
+    }
+
+    /* Badges */
+    .badge {
+        @apply inline-flex items-center px-2.5 py-1 text-xs font-semibold rounded-full;
+    }
+
+    .badge-success {
+        @apply bg-emerald-100 text-emerald-700;
+    }
+
+    .badge-danger {
+        @apply bg-red-100 text-red-700;
+    }
+
+    .badge-warning {
+        @apply bg-amber-100 text-amber-700;
+    }
+
+    .badge-info {
+        @apply bg-sky-100 text-sky-700;
+    }
+
+    .badge-secondary {
+        @apply bg-slate-100 text-slate-600;
+    }
+
+    .badge-primary {
+        @apply bg-indigo-100 text-indigo-700;
+    }
+
+    /* Page Header */
+    .page-header {
+        @apply flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6;
+    }
+
+    .page-title {
+        @apply text-2xl font-bold text-slate-800;
+    }
+
+    .page-subtitle {
+        @apply text-sm text-slate-500 mt-1;
+    }
+
+    /* Alert */
+    .alert {
+        @apply flex items-start gap-3 p-4 rounded-lg text-sm mb-6;
+    }
+
+    .alert-success {
+        @apply bg-emerald-50 text-emerald-800 border border-emerald-200;
+    }
+
+    .alert-danger {
+        @apply bg-red-50 text-red-800 border border-red-200;
+    }
+
+    .alert-warning {
+        @apply bg-amber-50 text-amber-800 border border-amber-200;
+    }
+
+    .alert-info {
+        @apply bg-sky-50 text-sky-800 border border-sky-200;
+    }
+
+    /* Search Bar */
+    .search-bar {
+        @apply flex items-center gap-3 mb-6 flex-wrap;
+    }
+
+    /* Empty State */
+    .empty-state {
+        @apply flex flex-col items-center justify-center py-16 text-center;
+    }
+
+    .empty-state-icon {
+        @apply w-16 h-16 text-slate-300 mb-4;
+    }
+
+    .empty-state-title {
+        @apply text-lg font-semibold text-slate-500 mb-2;
+    }
+
+    .empty-state-text {
+        @apply text-sm text-slate-400;
+    }
+
+    /* Pagination overrides */
+    nav[aria-label="Pagination Navigation"] span,
+    nav[aria-label="Pagination Navigation"] a {
+        @apply !text-sm;
+    }
+}
+
+@layer utilities {
+    .glass {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+}
