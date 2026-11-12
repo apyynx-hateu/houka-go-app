@@ -32,6 +32,10 @@
                         <span class="w-2 h-2 rounded-full bg-red-500"></span>
                         Tidak Hadir
                     </span>
+                @if($absensi->waktu_check_in)
+                    <div class="text-[11px] text-slate-500 mt-1 font-mono">
+                        Check-in: {{ substr($absensi->waktu_check_in, 0, 5) }} WIB
+                    </div>
                 @endif
             </div>
         </div>

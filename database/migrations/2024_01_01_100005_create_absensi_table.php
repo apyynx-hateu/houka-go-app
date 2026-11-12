@@ -14,6 +14,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_jadwal')->nullable();
             $table->date('tanggal');
             $table->enum('status', ['Hadir', 'Tidak Hadir']);
+            $table->time('waktu_check_in')->nullable();
             $table->text('keterangan')->nullable();
             $table->timestamps();
 

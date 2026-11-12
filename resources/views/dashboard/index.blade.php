@@ -1,22 +1,25 @@
 @extends('layouts.app')
 
 @section('title', 'Dashboard')
-@section('page_description', 'Ringkasan operasional dan metrik kinerja Houka GO')
+<!-- @section('page_description', 'Ringkasan operasional dan metrik kinerja Houka GO') -->
 
 @section('content')
+@php
+    $currentUser = Auth::guard('petinggi')->user() ?? Auth::user();
+@endphp
 <div class="space-y-8">
 
     <!-- Welcome Banner -->
     <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-brand-900 via-indigo-900 to-slate-900 p-6 sm:p-8 text-white shadow-xl shadow-brand-900/10">
         <div class="relative z-10 max-w-2xl">
             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand-500/30 text-brand-200 border border-brand-400/30 mb-3">
-                Selamat Datang, {{ Auth::user()->jabatan }}
+                Selamat Datang, {{ $currentUser->jabatan ?? 'ADMIN' }}
             </span>
             <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-2">
-                Halo, {{ Auth::user()->nama }}! 👋
+                Halo, {{ $currentUser->nama ?? 'Admin' }}! 
             </h1>
             <p class="text-slate-300 text-sm leading-relaxed">
-                Berikut adalah rekapitulasi data operasional bimbel Houka GO hari ini. Kelola tutor, pantau kehadiran jadwal mengajar, dan verifikasi pencairan honor secara terintegrasi.
+                Selamat datang di website Houka-Go. Kelola seluruh data dan aktivitas bisnis di satu tempat.
             </p>
         </div>
         <div class="absolute -right-8 -bottom-10 w-64 h-64 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -137,14 +140,63 @@
             </div>
         </div>
 
-        <!-- Card: Status Pembayaran & Permintaan Laporan -->
+    <!-- Financial & Workflow Overview Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- Card: Status Honor Tutor -->
         <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm">
             <div class="flex items-center justify-between mb-6">
                 <div>
-                    <h3 class="text-base font-bold text-slate-800">Pembayaran & Permintaan Laporan</h3>
-                    <p class="text-xs text-slate-400">Monitoring transaksi dan tiket laporan</p>
+                    <h3 class="text-base font-bold text-slate-800">Ringkasan Honor Tutor</h3>
+                    <p class="text-xs text-slate-400">Status akumulasi honor mengajar tutor</p>
                 </div>
-                <a href="{{ route('permintaan-laporan.index') }}" class="text-xs font-semibold text-brand-600 hover:text-brand-700">Kelola &rarr;</a>
+                <a href="{{ route('honor.index') }}" class="text-xs font-semibold text-brand-600 hover:text-brand-700">Lihat Semua &rarr;</a>
+            </div>
+
+            <div class="space-y-4">
+                <div class="flex items-center justify-between p-3.5 rounded-xl bg-amber-50/70 border border-amber-200/60">
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                        <div>
+                            <div class="text-xs font-semibold text-slate-700">Belum Dibayar</div>
+                            <div class="text-[11px] text-slate-500">Menunggu pemrosesan</div>
+                        </div>
+                    </div>
+                    <div class="text-sm font-bold text-amber-700">Rp {{ number_format($honorBelumDibayar, 0, ',', '.') }}</div>
+                </div>
+
+                <div class="flex items-center justify-between p-3.5 rounded-xl bg-blue-50/70 border border-blue-200/60">
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 rounded-full bg-blue-500"></div>
+                        <div>
+                            <div class="text-xs font-semibold text-slate-700">Sedang Diproses</div>
+                            <div class="text-[11px] text-slate-500">Dalam antrean verifikasi transfer</div>
+                        </div>
+                    </div>
+                    <div class="text-sm font-bold text-blue-700">Rp {{ number_format($honorDiproses, 0, ',', '.') }}</div>
+                </div>
+
+                <div class="flex items-center justify-between p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-200/60">
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                        <div>
+                            <div class="text-xs font-semibold text-slate-700">Telah Dibayar (Lunas)</div>
+                            <div class="text-[11px] text-slate-500">Terselesaikan secara penuh</div>
+                        </div>
+                    </div>
+                    <div class="text-sm font-bold text-emerald-700">Rp {{ number_format($honorDibayar, 0, ',', '.') }}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Status Pembayaran & Penilaian Kinerja -->
+        <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h3 class="text-base font-bold text-slate-800">Pembayaran & Penilaian Kinerja</h3>
+                    <p class="text-xs text-slate-400">Monitoring transaksi dan evaluasi tutor</p>
+                </div>
+                <a href="{{ route('pembayaran-honor.index') }}" class="text-xs font-semibold text-brand-600 hover:text-brand-700">Kelola Pembayaran &rarr;</a>
             </div>
 
             <div class="grid grid-cols-2 gap-4 mb-4">
@@ -160,13 +212,13 @@
 
             <div class="p-4 rounded-xl bg-indigo-50/60 border border-indigo-100 flex items-center justify-between">
                 <div>
-                    <div class="text-xs font-semibold text-indigo-900">Tiket Permintaan Laporan</div>
+                    <div class="text-xs font-semibold text-indigo-900">Penilaian Kinerja Tutor</div>
                     <div class="text-[11px] text-indigo-600 mt-0.5">
-                        {{ $laporanMenunggu }} Menunggu &bull; {{ $laporanDiproses }} Diproses
+                        {{ $totalPenilaian }} Penilaian telah tercatat oleh petinggi
                     </div>
                 </div>
-                <a href="{{ route('permintaan-laporan.index') }}" class="px-3 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-700 text-white text-xs font-medium transition-colors">
-                    Buka Tiket
+                <a href="{{ route('penilaian.index') }}" class="px-3 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-700 text-white text-xs font-medium transition-colors">
+                    Lihat Penilaian
                 </a>
             </div>
         </div>
@@ -212,11 +264,11 @@
                 <span class="text-xs font-semibold text-slate-700 group-hover:text-brand-600 block">+ Beri Penilaian</span>
             </a>
 
-            <a href="{{ route('permintaan-laporan.create') }}" class="p-4 rounded-xl bg-white border border-slate-200 hover:border-brand-500 hover:shadow-sm text-center transition-all group">
-                <div class="w-8 h-8 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            <a href="{{ route('pembayaran-honor.create') }}" class="p-4 rounded-xl bg-white border border-slate-200 hover:border-brand-500 hover:shadow-sm text-center transition-all group">
+                <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
                 </div>
-                <span class="text-xs font-semibold text-slate-700 group-hover:text-brand-600 block">+ Minta Laporan</span>
+                <span class="text-xs font-semibold text-slate-700 group-hover:text-brand-600 block">+ Bayar Honor</span>
             </a>
         </div>
     </div>

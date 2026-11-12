@@ -130,47 +130,53 @@
 
             <!-- Menu Group: Laporan -->
             <div>
-                <p class="px-3 text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">Laporan & Permintaan</p>
+                <p class="px-3 text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">Rekapitulasi Laporan</p>
                 <div class="space-y-1">
-                    <a href="{{ route('permintaan-laporan.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 {{ request()->routeIs('permintaan-laporan.*') ? 'bg-brand-600 text-white shadow-md shadow-brand-600/30 font-semibold' : 'text-slate-300 hover:bg-slate-800/80 hover:text-white' }}">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                        Permintaan Laporan
+                    <a href="{{ route('laporan.tutor') }}" class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-xs font-medium {{ request()->routeIs('laporan.tutor') ? 'text-brand-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white hover:bg-slate-800/50' }}">
+                        • Laporan Tutor
                     </a>
-                    <div class="pt-2">
-                        <p class="px-3 text-[10px] uppercase font-bold text-slate-500 mb-1">Rekap Laporan</p>
-                        <a href="{{ route('laporan.tutor') }}" class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-xs font-medium {{ request()->routeIs('laporan.tutor') ? 'text-brand-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white hover:bg-slate-800/50' }}">
-                            • Laporan Tutor
-                        </a>
-                        <a href="{{ route('laporan.absensi') }}" class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-xs font-medium {{ request()->routeIs('laporan.absensi') ? 'text-brand-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white hover:bg-slate-800/50' }}">
-                            • Laporan Absensi
-                        </a>
-                        <a href="{{ route('laporan.jadwal') }}" class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-xs font-medium {{ request()->routeIs('laporan.jadwal') ? 'text-brand-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white hover:bg-slate-800/50' }}">
-                            • Laporan Jadwal
-                        </a>
-                        <a href="{{ route('laporan.honor') }}" class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-xs font-medium {{ request()->routeIs('laporan.honor') ? 'text-brand-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white hover:bg-slate-800/50' }}">
-                            • Laporan Honor
-                        </a>
-                        <a href="{{ route('laporan.operasional') }}" class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-xs font-medium {{ request()->routeIs('laporan.operasional') ? 'text-brand-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white hover:bg-slate-800/50' }}">
-                            • Ringkasan Operasional
-                        </a>
-                    </div>
+                    <a href="{{ route('laporan.absensi') }}" class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-xs font-medium {{ request()->routeIs('laporan.absensi') ? 'text-brand-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white hover:bg-slate-800/50' }}">
+                        • Laporan Absensi
+                    </a>
+                    <a href="{{ route('laporan.jadwal') }}" class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-xs font-medium {{ request()->routeIs('laporan.jadwal') ? 'text-brand-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white hover:bg-slate-800/50' }}">
+                        • Laporan Jadwal
+                    </a>
+                    <a href="{{ route('laporan.honor') }}" class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-xs font-medium {{ request()->routeIs('laporan.honor') ? 'text-brand-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white hover:bg-slate-800/50' }}">
+                        • Laporan Honor
+                    </a>
+                    <a href="{{ route('laporan.operasional') }}" class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-xs font-medium {{ request()->routeIs('laporan.operasional') ? 'text-brand-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white hover:bg-slate-800/50' }}">
+                        • Ringkasan Operasional
+                    </a>
                 </div>
+            </div>
+
+            <!-- Menu Group: Pengaturan -->
+            <div>
+                <p class="px-3 text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">Akun & Sistem</p>
+                <a href="{{ route('admin.profile') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 {{ request()->routeIs('admin.profile') ? 'bg-brand-600 text-white shadow-md shadow-brand-600/30 font-semibold' : 'text-slate-300 hover:bg-slate-800/80 hover:text-white' }}">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                    Profil Petinggi
+                </a>
             </div>
         </div>
 
+        @php
+            $authUser = Auth::guard('petinggi')->user() ?? Auth::user();
+        @endphp
+
         <!-- User Profile & Logout -->
         <div class="p-4 border-t border-slate-800/80 bg-slate-900/90">
-            <div class="flex items-center gap-3 mb-3">
-                <div class="w-9 h-9 rounded-full bg-brand-500/20 text-brand-400 border border-brand-500/30 flex items-center justify-center font-bold text-sm">
-                    {{ substr(Auth::user()->nama ?? 'A', 0, 1) }}
+            <a href="{{ route('admin.profile') }}" class="flex items-center gap-3 mb-3 p-1.5 rounded-xl hover:bg-slate-800/70 transition-colors group">
+                <div class="w-9 h-9 rounded-full bg-brand-500/20 text-brand-400 border border-brand-500/30 flex items-center justify-center font-bold text-sm group-hover:bg-brand-500/30">
+                    {{ substr($authUser->nama ?? 'A', 0, 1) }}
                 </div>
                 <div class="flex-1 min-w-0">
-                    <p class="text-sm font-semibold text-white truncate">{{ Auth::user()->nama ?? 'Petinggi' }}</p>
+                    <p class="text-sm font-semibold text-white truncate group-hover:text-brand-300 transition-colors">{{ $authUser->nama ?? 'Petinggi' }}</p>
                     <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-brand-900/60 text-brand-300 border border-brand-700/50">
-                        {{ Auth::user()->jabatan ?? 'User' }}
+                        {{ $authUser->jabatan ?? 'ADMIN' }}
                     </span>
                 </div>
-            </div>
+            </a>
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button type="submit" class="w-full flex items-center justify-center gap-2 px-3 py-2 text-xs font-medium text-slate-300 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors border border-slate-700/60 hover:border-red-500/30">
@@ -202,7 +208,7 @@
                 </span>
                 <div class="h-6 w-px bg-slate-200 hidden sm:block"></div>
                 <div class="text-right hidden sm:block">
-                    <div class="text-xs font-semibold text-slate-700">{{ Auth::user()->nama ?? 'Admin' }}</div>
+                    <div class="text-xs font-semibold text-slate-700">{{ (Auth::guard('petinggi')->user() ?? Auth::user())->nama ?? 'Admin' }}</div>
                     <div class="text-[11px] text-slate-400">{{ now()->isoFormat('D MMMM Y') }}</div>
                 </div>
             </div>

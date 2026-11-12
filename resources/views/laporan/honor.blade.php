@@ -85,8 +85,9 @@
                     <tr>
                         <th class="px-5 py-3.5">Periode</th>
                         <th class="px-5 py-3.5">Nama Tutor</th>
-                        <th class="px-5 py-3.5">Tarif / Jam</th>
-                        <th class="px-5 py-3.5">Total Jam</th>
+                        <th class="px-5 py-3.5">Jumlah Sesi</th>
+                        <th class="px-5 py-3.5">Tarif / Sesi</th>
+                        <th class="px-5 py-3.5">Fee Tambahan</th>
                         <th class="px-5 py-3.5">Penyesuaian</th>
                         <th class="px-5 py-3.5">Total Honor</th>
                         <th class="px-5 py-3.5">Status</th>
@@ -101,11 +102,15 @@
                             <td class="px-5 py-4 font-bold text-slate-800">
                                 {{ $honor->tutor->nama ?? '-' }}
                             </td>
-                            <td class="px-5 py-4 text-slate-600">
-                                Rp {{ number_format($honor->tarif_per_jam, 0, ',', '.') }}
+                            <td class="px-5 py-4 text-slate-700 font-semibold">
+                                {{ $honor->jumlah_sesi }} Sesi
                             </td>
-                            <td class="px-5 py-4 text-slate-700 font-medium">
-                                {{ $honor->total_jam_mengajar }} Jam
+                            <td class="px-5 py-4 text-slate-600">
+                                Rp {{ number_format($honor->tarif_per_sesi, 0, ',', '.') }}
+                            </td>
+                            <td class="px-5 py-4 text-slate-600 text-[11px]">
+                                <div>Check-in: Rp {{ number_format($honor->fee_check_in, 0, ',', '.') }}</div>
+                                <div>Transport: Rp {{ number_format($honor->fee_transport, 0, ',', '.') }}</div>
                             </td>
                             <td class="px-5 py-4 text-slate-600">
                                 {{ $honor->penyesuaian_honor != 0 ? 'Rp ' . number_format($honor->penyesuaian_honor, 0, ',', '.') : '-' }}
@@ -131,7 +136,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="px-5 py-10 text-center text-slate-400">
+                            <td colspan="8" class="px-5 py-10 text-center text-slate-400">
                                 Belum ada data honor yang sesuai filter.
                             </td>
                         </tr>

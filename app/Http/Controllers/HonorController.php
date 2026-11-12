@@ -50,23 +50,29 @@ class HonorController extends Controller
         $validated = $request->validate([
             'id_tutor' => 'required|exists:tutor,id_tutor',
             'periode_bulan' => 'required|date_format:Y-m',
-            'tarif_per_jam' => 'required|numeric|min:0',
-            'jumlah_siswa' => 'nullable|integer|min:0',
+            'jumlah_sesi' => 'nullable|integer|min:0',
+            'tarif_per_sesi' => 'nullable|numeric|min:0',
+            'fee_check_in' => 'nullable|numeric|min:0',
+            'fee_transport' => 'nullable|numeric|min:0',
             'penyesuaian_honor' => 'nullable|numeric',
+            'catatan' => 'nullable|string',
         ]);
 
         $data = $this->honorService->hitungHonor(
             $validated['id_tutor'],
             $validated['periode_bulan'] . '-01',
-            (float) $validated['tarif_per_jam'],
+            isset($validated['jumlah_sesi']) && $validated['jumlah_sesi'] !== '' ? (int) $validated['jumlah_sesi'] : null,
+            !empty($validated['tarif_per_sesi']) ? (float) $validated['tarif_per_sesi'] : null,
             (float) ($validated['penyesuaian_honor'] ?? 0),
-            (int) ($validated['jumlah_siswa'] ?? 0)
+            isset($validated['fee_check_in']) && $validated['fee_check_in'] !== '' ? (float) $validated['fee_check_in'] : null,
+            isset($validated['fee_transport']) && $validated['fee_transport'] !== '' ? (float) $validated['fee_transport'] : null,
+            $validated['catatan'] ?? null
         );
 
         $data['status'] = 'Belum Dibayar';
         Honor::create($data);
 
-        return redirect()->route('honor.index')->with('success', 'Honor berhasil dibuat. Total jam dihitung dari absensi Hadir.');
+        return redirect()->route('honor.index')->with('success', 'Honor berhasil dihitung dan dicatat sesuai rumus berbasis sesi.');
     }
 
     public function show(Honor $honor)
@@ -92,15 +98,18 @@ class HonorController extends Controller
         }
 
         $validated = $request->validate([
-            'tarif_per_jam' => 'required|numeric|min:0',
-            'jumlah_siswa' => 'nullable|integer|min:0',
-            'total_jam_mengajar' => 'required|numeric|min:0',
+            'jumlah_sesi' => 'required|integer|min:0',
+            'tarif_per_sesi' => 'required|numeric|min:0',
+            'fee_check_in' => 'required|numeric|min:0',
+            'fee_transport' => 'required|numeric|min:0',
             'penyesuaian_honor' => 'nullable|numeric',
             'status' => 'required|in:Belum Dibayar,Diproses,Dibayar',
+            'catatan' => 'nullable|string',
         ]);
 
         $validated['penyesuaian_honor'] = $validated['penyesuaian_honor'] ?? 0;
-        $validated['total_honor'] = ($validated['tarif_per_jam'] * $validated['total_jam_mengajar']) + $validated['penyesuaian_honor'];
+        $honorSesi = $validated['jumlah_sesi'] * $validated['tarif_per_sesi'];
+        $validated['total_honor'] = max(0, $honorSesi + $validated['fee_check_in'] + $validated['fee_transport'] + $validated['penyesuaian_honor']);
 
         $honor->update($validated);
 

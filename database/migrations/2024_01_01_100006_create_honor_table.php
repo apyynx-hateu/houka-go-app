@@ -12,12 +12,14 @@ return new class extends Migration
             $table->id('id_honor');
             $table->unsignedBigInteger('id_tutor');
             $table->date('periode_bulan');
-            $table->decimal('tarif_per_jam', 12, 2)->default(0);
-            $table->integer('jumlah_siswa')->unsigned()->default(0);
-            $table->decimal('total_jam_mengajar', 8, 2)->default(0);
+            $table->integer('jumlah_sesi')->unsigned()->default(0);
+            $table->decimal('tarif_per_sesi', 12, 2)->default(50000);
+            $table->decimal('fee_check_in', 12, 2)->default(0);
+            $table->decimal('fee_transport', 12, 2)->default(0);
             $table->decimal('penyesuaian_honor', 12, 2)->default(0);
             $table->decimal('total_honor', 12, 2)->default(0);
             $table->enum('status', ['Belum Dibayar', 'Diproses', 'Dibayar'])->default('Belum Dibayar');
+            $table->text('catatan')->nullable();
             $table->timestamps();
 
             $table->foreign('id_tutor')->references('id_tutor')->on('tutor')->onDelete('restrict');

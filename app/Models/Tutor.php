@@ -2,16 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Tutor extends Model
+class Tutor extends Authenticatable
 {
     protected $table = 'tutor';
     protected $primaryKey = 'id_tutor';
 
     protected $fillable = [
         'nama',
+        'username',
+        'password',
         'jenis_kelamin',
         'tanggal_lahir',
         'alamat',
@@ -22,9 +24,15 @@ class Tutor extends Model
         'tanggal_bergabung',
     ];
 
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
     protected function casts(): array
     {
         return [
+            'password' => 'hashed',
             'tanggal_lahir' => 'date',
             'tanggal_bergabung' => 'date',
         ];

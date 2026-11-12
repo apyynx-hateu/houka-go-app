@@ -14,20 +14,24 @@ class Honor extends Model
     protected $fillable = [
         'id_tutor',
         'periode_bulan',
-        'tarif_per_jam',
-        'jumlah_siswa',
-        'total_jam_mengajar',
+        'jumlah_sesi',
+        'tarif_per_sesi',
+        'fee_check_in',
+        'fee_transport',
         'penyesuaian_honor',
         'total_honor',
         'status',
+        'catatan',
     ];
 
     protected function casts(): array
     {
         return [
             'periode_bulan' => 'date',
-            'tarif_per_jam' => 'decimal:2',
-            'total_jam_mengajar' => 'decimal:2',
+            'jumlah_sesi' => 'integer',
+            'tarif_per_sesi' => 'decimal:2',
+            'fee_check_in' => 'decimal:2',
+            'fee_transport' => 'decimal:2',
             'penyesuaian_honor' => 'decimal:2',
             'total_honor' => 'decimal:2',
         ];
@@ -61,6 +65,6 @@ class Honor extends Model
 
     public function hitungTotal(): float
     {
-        return ($this->tarif_per_jam * $this->total_jam_mengajar) + $this->penyesuaian_honor;
+        return ($this->jumlah_sesi * $this->tarif_per_sesi) + $this->fee_check_in + $this->fee_transport + $this->penyesuaian_honor;
     }
 }

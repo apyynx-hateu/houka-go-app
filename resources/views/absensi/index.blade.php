@@ -68,7 +68,8 @@
                         <th class="px-5 py-3.5">Tanggal</th>
                         <th class="px-5 py-3.5">Nama Tutor</th>
                         <th class="px-5 py-3.5">Sesi & Sekolah Mitra</th>
-                        <th class="px-5 py-3.5">Status Kehadiran</th>
+                        <th class="px-5 py-3.5">Status</th>
+                        <th class="px-5 py-3.5">Check-in</th>
                         <th class="px-5 py-3.5">Keterangan</th>
                         <th class="px-5 py-3.5 text-right">Aksi</th>
                     </tr>
@@ -105,6 +106,9 @@
                                     </span>
                                 @endif
                             </td>
+                            <td class="px-5 py-4 text-slate-600 font-mono text-[11px]">
+                                {{ $abs->waktu_check_in ? substr($abs->waktu_check_in, 0, 5) . ' WIB' : '-' }}
+                            </td>
                             <td class="px-5 py-4 text-slate-600 max-w-xs truncate">
                                 {{ $abs->keterangan ?? '-' }}
                             </td>
@@ -128,7 +132,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-5 py-10 text-center text-slate-400">
+                            <td colspan="7" class="px-5 py-10 text-center text-slate-400">
                                 Belum ada data absensi yang sesuai filter.
                             </td>
                         </tr>

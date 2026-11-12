@@ -40,6 +40,14 @@ return [
             'driver' => 'session',
             'provider' => 'petinggi',
         ],
+        'petinggi' => [
+            'driver' => 'session',
+            'provider' => 'petinggi',
+        ],
+        'tutor' => [
+            'driver' => 'session',
+            'provider' => 'tutor',
+        ],
     ],
 
     /*
@@ -63,6 +71,10 @@ return [
         'petinggi' => [
             'driver' => 'eloquent',
             'model' => App\Models\Petinggi::class,
+        ],
+        'tutor' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Tutor::class,
         ],
     ],
 

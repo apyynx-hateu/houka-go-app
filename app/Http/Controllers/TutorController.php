@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Tutor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class TutorController extends Controller
 {
@@ -14,6 +16,7 @@ class TutorController extends Controller
         if ($request->filled('cari')) {
             $query->where(function ($q) use ($request) {
                 $q->where('nama', 'like', '%' . $request->cari . '%')
+                  ->orWhere('username', 'like', '%' . $request->cari . '%')
                   ->orWhere('email', 'like', '%' . $request->cari . '%')
                   ->orWhere('no_telepon', 'like', '%' . $request->cari . '%');
             });
@@ -37,6 +40,8 @@ class TutorController extends Controller
     {
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
+            'username' => 'nullable|string|max:255|unique:tutor,username',
+            'password' => 'nullable|string|min:6',
             'jenis_kelamin' => 'nullable|in:Laki-laki,Perempuan',
             'tanggal_lahir' => 'nullable|date|before_or_equal:today',
             'alamat' => 'nullable|string',
@@ -46,6 +51,13 @@ class TutorController extends Controller
             'status_kerja' => 'required|in:Aktif,Tidak Aktif',
             'tanggal_bergabung' => 'nullable|date',
         ]);
+
+        if (!empty($validated['password'])) {
+            $validated['password'] = Hash::make($validated['password']);
+        } elseif (!empty($validated['username'])) {
+            // Default password jika diisi username tapi password kosong
+            $validated['password'] = Hash::make('password');
+        }
 
         Tutor::create($validated);
 
@@ -67,6 +79,13 @@ class TutorController extends Controller
     {
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
+            'username' => [
+                'nullable',
+                'string',
+                'max:255',
+                Rule::unique('tutor', 'username')->ignore($tutor->id_tutor, 'id_tutor'),
+            ],
+            'password' => 'nullable|string|min:6',
             'jenis_kelamin' => 'nullable|in:Laki-laki,Perempuan',
             'tanggal_lahir' => 'nullable|date|before_or_equal:today',
             'alamat' => 'nullable|string',
@@ -77,6 +96,12 @@ class TutorController extends Controller
             'tanggal_bergabung' => 'nullable|date',
         ]);
 
+        if (!empty($validated['password'])) {
+            $validated['password'] = Hash::make($validated['password']);
+        } else {
+            unset($validated['password']);
+        }
+
         $tutor->update($validated);
 
         return redirect()->route('tutor.index')->with('success', 'Data tutor berhasil diperbarui.');
@@ -84,10 +109,10 @@ class TutorController extends Controller
 
     public function destroy(Tutor $tutor)
     {
-        // Soft delete: ubah status menjadi Tidak Aktif
-        if ($tutor->jadwal()->exists() || $tutor->absensi()->exists() || $tutor->honor()->exists()) {
+        // Data integrity safeguard (PRD Section 3.1)
+        if ($tutor->jadwal()->exists() || $tutor->absensi()->exists() || $tutor->honor()->exists() || $tutor->penilaian()->exists()) {
             $tutor->update(['status_kerja' => 'Tidak Aktif']);
-            return redirect()->route('tutor.index')->with('success', 'Tutor dinonaktifkan karena memiliki data terkait.');
+            return redirect()->route('tutor.index')->with('success', 'Tutor dinonaktifkan untuk menjaga integritas riwayat jadwal/absensi/honor.');
         }
 
         $tutor->delete();

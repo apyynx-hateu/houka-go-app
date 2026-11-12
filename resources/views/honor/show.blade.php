@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Slip Rincian Honor')
-@section('page_description', 'Detail perhitungan honor dan riwayat transaksi pencairan')
+@section('page_description', 'Detail perhitungan honor berbasis sesi dan riwayat transaksi pencairan')
 
 @section('content')
 <div class="max-w-3xl mx-auto space-y-6">
@@ -66,19 +66,27 @@
 
         <!-- Breakdown Table -->
         <div class="border-t border-b border-slate-200 py-4 my-2">
-            <h4 class="text-xs font-bold text-slate-700 uppercase mb-3">Rincian Komponen Honor</h4>
+            <h4 class="text-xs font-bold text-slate-700 uppercase mb-3">Rincian Komponen Honor Berbasis Sesi</h4>
             <div class="space-y-2 text-xs">
                 <div class="flex justify-between py-1 text-slate-600">
-                    <span>Tarif per Jam Mengajar</span>
-                    <span class="font-medium">Rp {{ number_format($honor->tarif_per_jam, 0, ',', '.') }}</span>
+                    <span>Jumlah Sesi Mengajar (Validasi Absensi Hadir)</span>
+                    <span class="font-bold text-brand-600">{{ $honor->jumlah_sesi }} Sesi</span>
                 </div>
                 <div class="flex justify-between py-1 text-slate-600">
-                    <span>Total Jam Mengajar (Absensi Hadir)</span>
-                    <span class="font-medium">{{ $honor->total_jam_mengajar }} Jam</span>
+                    <span>Tarif per Sesi</span>
+                    <span class="font-medium">Rp {{ number_format($honor->tarif_per_sesi, 0, ',', '.') }}</span>
                 </div>
                 <div class="flex justify-between py-1 text-slate-600">
-                    <span>Subtotal Dasar (Tarif &times; Jam)</span>
-                    <span class="font-medium">Rp {{ number_format($honor->tarif_per_jam * $honor->total_jam_mengajar, 0, ',', '.') }}</span>
+                    <span>Subtotal Sesi ({{ $honor->jumlah_sesi }} &times; Rp {{ number_format($honor->tarif_per_sesi, 0, ',', '.') }})</span>
+                    <span class="font-medium">Rp {{ number_format($honor->jumlah_sesi * $honor->tarif_per_sesi, 0, ',', '.') }}</span>
+                </div>
+                <div class="flex justify-between py-1 text-slate-600">
+                    <span>Fee Check-in</span>
+                    <span class="font-medium text-emerald-600">+ Rp {{ number_format($honor->fee_check_in, 0, ',', '.') }}</span>
+                </div>
+                <div class="flex justify-between py-1 text-slate-600">
+                    <span>Fee Transport</span>
+                    <span class="font-medium text-emerald-600">+ Rp {{ number_format($honor->fee_transport, 0, ',', '.') }}</span>
                 </div>
                 <div class="flex justify-between py-1 text-slate-600">
                     <span>Penyesuaian / Bonus / Potongan</span>
@@ -86,6 +94,11 @@
                         {{ $honor->penyesuaian_honor > 0 ? '+' : '' }}Rp {{ number_format($honor->penyesuaian_honor, 0, ',', '.') }}
                     </span>
                 </div>
+                @if($honor->catatan)
+                    <div class="p-2.5 rounded-lg bg-slate-50 text-[11px] text-slate-600 mt-2">
+                        <strong>Catatan:</strong> {{ $honor->catatan }}
+                    </div>
+                @endif
                 <div class="flex justify-between py-2 border-t border-slate-200 text-slate-900 font-extrabold text-sm">
                     <span>Total Honor Bersih</span>
                     <span class="text-brand-600">Rp {{ number_format($honor->total_honor, 0, ',', '.') }}</span>

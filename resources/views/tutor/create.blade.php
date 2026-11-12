@@ -25,7 +25,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class="sm:col-span-2">
                         <label for="nama" class="block text-xs font-semibold text-slate-700 mb-1.5">Nama Lengkap <span class="text-red-500">*</span></label>
-                        <input type="text" id="nama" name="nama" value="{{ old('nama') }}" required
+                        <input autocomplete="off" type="text" id="nama" name="nama" value="{{ old('nama') }}" required
                             class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
                             placeholder="Contoh: Ahmad Fauzi, S.Pd.">
                     </div>
@@ -93,6 +93,26 @@
                         <label for="tanggal_bergabung" class="block text-xs font-semibold text-slate-700 mb-1.5">Tanggal Bergabung</label>
                         <input type="date" id="tanggal_bergabung" name="tanggal_bergabung" value="{{ old('tanggal_bergabung', date('Y-m-d')) }}"
                             class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section: Akun Login Portal Tutor -->
+            <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 pb-2 border-b border-slate-100">Kredensial Login Tutor</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label for="username" class="block text-xs font-semibold text-slate-700 mb-1.5">Username Login</label>
+                        <input type="text" id="username" name="username" value="{{ old('username') }}"
+                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+                            placeholder="Contoh: ahmad">
+                    </div>
+
+                    <div>
+                        <label for="password" class="block text-xs font-semibold text-slate-700 mb-1.5">Password</label>
+                        <input type="password" id="password" name="password"
+                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+                            placeholder="Minimal 6 karakter (default: password)">
                     </div>
                 </div>
             </div>

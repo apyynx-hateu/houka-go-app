@@ -35,10 +35,6 @@ class Petinggi extends Authenticatable
         return $this->hasMany(Penilaian::class, 'id_petinggi', 'id_petinggi');
     }
 
-    public function permintaanLaporan(): HasMany
-    {
-        return $this->hasMany(PermintaanLaporan::class, 'id_petinggi', 'id_petinggi');
-    }
 
     public function isAktif(): bool
     {

@@ -15,6 +15,7 @@ class Absensi extends Model
         'id_jadwal',
         'tanggal',
         'status',
+        'waktu_check_in',
         'keterangan',
     ];
 

@@ -44,17 +44,18 @@ class PembayaranHonorController extends Controller
             'tanggal_pembayaran' => 'required|date',
             'jumlah' => 'required|numeric|min:0.01',
             'nomor_rekening' => 'nullable|string|max:255',
+            'status' => 'nullable|in:Pending,Berhasil,Gagal',
             'keterangan' => 'nullable|string',
         ]);
 
-        $validated['status'] = 'Pending';
+        $validated['status'] = $validated['status'] ?? 'Pending';
 
-        PembayaranHonor::create($validated);
+        $pembayaran = PembayaranHonor::create($validated);
 
-        // Update status honor menjadi Diproses
+        // Sinkronisasi status honor
         $honor = Honor::find($validated['id_honor']);
-        if ($honor && $honor->status === 'Belum Dibayar') {
-            $honor->update(['status' => 'Diproses']);
+        if ($honor) {
+            $this->sinkronisasiStatusHonor($honor);
         }
 
         return redirect()->route('pembayaran-honor.index')->with('success', 'Pembayaran berhasil dicatat.');
@@ -84,23 +85,38 @@ class PembayaranHonorController extends Controller
 
         $pembayaranHonor->update($validated);
 
-        // Jika berhasil, cek apakah total pembayaran berhasil >= total honor
-        if ($validated['status'] === 'Berhasil') {
-            $honor = $pembayaranHonor->honor;
-            $totalDibayar = $honor->pembayaranBerhasil()->sum('jumlah');
-            if ($totalDibayar >= $honor->total_honor) {
-                $honor->update(['status' => 'Dibayar']);
-            } else {
-                $honor->update(['status' => 'Diproses']);
-            }
-        }
+        // Sinkronisasi status honor terkait
+        $this->sinkronisasiStatusHonor($pembayaranHonor->honor);
 
         return redirect()->route('pembayaran-honor.index')->with('success', 'Pembayaran berhasil diperbarui.');
     }
 
     public function destroy(PembayaranHonor $pembayaranHonor)
     {
+        $honor = $pembayaranHonor->honor;
         $pembayaranHonor->delete();
+
+        if ($honor) {
+            $this->sinkronisasiStatusHonor($honor);
+        }
+
         return redirect()->route('pembayaran-honor.index')->with('success', 'Pembayaran berhasil dihapus.');
+    }
+
+    /**
+     * Memastikan konsistensi status data honor terhadap riwayat transaksi pembayarannya.
+     */
+    protected function sinkronisasiStatusHonor(Honor $honor): void
+    {
+        $totalBerhasil = (float) $honor->pembayaranBerhasil()->sum('jumlah');
+        $hasPending = $honor->pembayaran()->where('status', 'Pending')->exists();
+
+        if ($totalBerhasil >= (float) $honor->total_honor && (float) $honor->total_honor > 0) {
+            $honor->update(['status' => 'Dibayar']);
+        } elseif ($totalBerhasil > 0 || $hasPending) {
+            $honor->update(['status' => 'Diproses']);
+        } else {
+            $honor->update(['status' => 'Belum Dibayar']);
+        }
     }
 }

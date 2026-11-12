@@ -8,7 +8,7 @@ use App\Models\Jadwal;
 use App\Models\Absensi;
 use App\Models\Honor;
 use App\Models\PembayaranHonor;
-use App\Models\PermintaanLaporan;
+use App\Models\Penilaian;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -27,8 +27,9 @@ class DashboardController extends Controller
             'honorDibayar' => Honor::where('status', 'Dibayar')->sum('total_honor'),
             'pembayaranBerhasil' => PembayaranHonor::where('status', 'Berhasil')->sum('jumlah'),
             'pembayaranPending' => PembayaranHonor::where('status', 'Pending')->sum('jumlah'),
-            'laporanMenunggu' => PermintaanLaporan::where('status', 'Menunggu')->count(),
-            'laporanDiproses' => PermintaanLaporan::where('status', 'Diproses')->count(),
+            'totalPenilaian' => Penilaian::count(),
+            'absensiTerbaru' => Absensi::with(['tutor', 'jadwal.sekolah'])->orderBy('tanggal', 'desc')->limit(5)->get(),
+            'jadwalTerbaru' => Jadwal::with(['tutor', 'sekolah'])->limit(5)->get(),
         ];
 
         return view('dashboard.index', $data);

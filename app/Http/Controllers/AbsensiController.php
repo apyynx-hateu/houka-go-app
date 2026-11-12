@@ -49,8 +49,15 @@ class AbsensiController extends Controller
             'id_jadwal' => 'nullable|exists:jadwal,id_jadwal',
             'tanggal' => 'required|date',
             'status' => 'required|in:Hadir,Tidak Hadir',
+            'waktu_check_in' => 'nullable|string',
             'keterangan' => 'nullable|string',
         ]);
+
+        if ($validated['status'] === 'Hadir' && empty($validated['waktu_check_in'])) {
+            $validated['waktu_check_in'] = now()->format('H:i:s');
+        } elseif ($validated['status'] === 'Tidak Hadir') {
+            $validated['waktu_check_in'] = null;
+        }
 
         // Validasi konsistensi tutor-jadwal
         if (!empty($validated['id_jadwal'])) {
@@ -95,8 +102,13 @@ class AbsensiController extends Controller
             'id_jadwal' => 'nullable|exists:jadwal,id_jadwal',
             'tanggal' => 'required|date',
             'status' => 'required|in:Hadir,Tidak Hadir',
+            'waktu_check_in' => 'nullable|string',
             'keterangan' => 'nullable|string',
         ]);
+
+        if ($validated['status'] === 'Tidak Hadir') {
+            $validated['waktu_check_in'] = null;
+        }
 
         if (!empty($validated['id_jadwal'])) {
             $jadwal = Jadwal::find($validated['id_jadwal']);

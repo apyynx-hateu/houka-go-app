@@ -39,10 +39,10 @@ class DatabaseSeeder extends Seeder
 
         // Tutor contoh
         $tutors = [
-            ['nama' => 'Ahmad Fauzi', 'jenis_kelamin' => 'Laki-laki', 'no_telepon' => '081234567890', 'email' => 'ahmad@email.com', 'pendidikan_terakhir' => 'S1 Matematika', 'status_kerja' => 'Aktif', 'tanggal_bergabung' => '2024-01-15'],
-            ['nama' => 'Siti Nurhaliza', 'jenis_kelamin' => 'Perempuan', 'no_telepon' => '081234567891', 'email' => 'siti@email.com', 'pendidikan_terakhir' => 'S1 Bahasa Inggris', 'status_kerja' => 'Aktif', 'tanggal_bergabung' => '2024-02-01'],
-            ['nama' => 'Budi Santoso', 'jenis_kelamin' => 'Laki-laki', 'no_telepon' => '081234567892', 'email' => 'budi@email.com', 'pendidikan_terakhir' => 'S1 Fisika', 'status_kerja' => 'Aktif', 'tanggal_bergabung' => '2024-03-10'],
-            ['nama' => 'Dewi Lestari', 'jenis_kelamin' => 'Perempuan', 'no_telepon' => '081234567893', 'email' => 'dewi@email.com', 'pendidikan_terakhir' => 'S1 Biologi', 'status_kerja' => 'Tidak Aktif', 'tanggal_bergabung' => '2023-06-01'],
+            ['nama' => 'Ahmad Fauzi', 'username' => 'ahmad', 'password' => Hash::make('password'), 'jenis_kelamin' => 'Laki-laki', 'no_telepon' => '081234567890', 'email' => 'ahmad@email.com', 'pendidikan_terakhir' => 'S1 Matematika', 'status_kerja' => 'Aktif', 'tanggal_bergabung' => '2024-01-15'],
+            ['nama' => 'Siti Nurhaliza', 'username' => 'siti', 'password' => Hash::make('password'), 'jenis_kelamin' => 'Perempuan', 'no_telepon' => '081234567891', 'email' => 'siti@email.com', 'pendidikan_terakhir' => 'S1 Bahasa Inggris', 'status_kerja' => 'Aktif', 'tanggal_bergabung' => '2024-02-01'],
+            ['nama' => 'Budi Santoso', 'username' => 'budi', 'password' => Hash::make('password'), 'jenis_kelamin' => 'Laki-laki', 'no_telepon' => '081234567892', 'email' => 'budi@email.com', 'pendidikan_terakhir' => 'S1 Fisika', 'status_kerja' => 'Aktif', 'tanggal_bergabung' => '2024-03-10'],
+            ['nama' => 'Dewi Lestari', 'username' => 'dewi', 'password' => Hash::make('password'), 'jenis_kelamin' => 'Perempuan', 'no_telepon' => '081234567893', 'email' => 'dewi@email.com', 'pendidikan_terakhir' => 'S1 Biologi', 'status_kerja' => 'Tidak Aktif', 'tanggal_bergabung' => '2023-06-01'],
         ];
 
         foreach ($tutors as $tutor) {
@@ -58,6 +58,100 @@ class DatabaseSeeder extends Seeder
 
         foreach ($sekolahs as $sekolah) {
             Sekolah::create($sekolah);
+        }
+
+        // Jadwal contoh
+        $ahmad = Tutor::where('username', 'ahmad')->first();
+        $siti = Tutor::where('username', 'siti')->first();
+        $sma1 = Sekolah::first();
+        $smpHb = Sekolah::skip(1)->first();
+
+        if ($ahmad && $sma1) {
+            \App\Models\Jadwal::create([
+                'id_tutor' => $ahmad->id_tutor,
+                'id_sekolah' => $sma1->id_sekolah,
+                'hari' => 'Senin',
+                'jam_mulai' => '08:00',
+                'jam_selesai' => '10:00',
+            ]);
+
+            \App\Models\Jadwal::create([
+                'id_tutor' => $ahmad->id_tutor,
+                'id_sekolah' => $sma1->id_sekolah,
+                'hari' => 'Rabu',
+                'jam_mulai' => '10:00',
+                'jam_selesai' => '12:00',
+            ]);
+        }
+
+        if ($siti && $smpHb) {
+            \App\Models\Jadwal::create([
+                'id_tutor' => $siti->id_tutor,
+                'id_sekolah' => $smpHb->id_sekolah,
+                'hari' => 'Selasa',
+                'jam_mulai' => '13:00',
+                'jam_selesai' => '15:00',
+            ]);
+        }
+
+        // Absensi contoh
+        $jadwalAhmad = \App\Models\Jadwal::where('id_tutor', $ahmad->id_tutor)->first();
+        if ($jadwalAhmad) {
+            \App\Models\Absensi::create([
+                'id_tutor' => $ahmad->id_tutor,
+                'id_jadwal' => $jadwalAhmad->id_jadwal,
+                'tanggal' => now()->subDays(7)->format('Y-m-d'),
+                'status' => 'Hadir',
+                'waktu_check_in' => '07:55:00',
+                'keterangan' => 'Hadir tepat waktu mengajar Matematika Bab 1',
+            ]);
+
+            \App\Models\Absensi::create([
+                'id_tutor' => $ahmad->id_tutor,
+                'id_jadwal' => $jadwalAhmad->id_jadwal,
+                'tanggal' => now()->subDays(5)->format('Y-m-d'),
+                'status' => 'Hadir',
+                'waktu_check_in' => '07:58:00',
+                'keterangan' => 'Hadir sesi latihan soal Matematika',
+            ]);
+        }
+
+        // Honor contoh untuk Ahmad (2 sesi: tarif 50k, fee check in 20k, fee transport 30k = 100k/sesi -> 200k)
+        if ($ahmad) {
+            $honorAhmad = \App\Models\Honor::create([
+                'id_tutor' => $ahmad->id_tutor,
+                'periode_bulan' => now()->startOfMonth()->format('Y-m-d'),
+                'jumlah_sesi' => 2,
+                'tarif_per_sesi' => 50000,
+                'fee_check_in' => 40000,
+                'fee_transport' => 60000,
+                'penyesuaian_honor' => 0,
+                'total_honor' => 200000,
+                'status' => 'Diproses',
+                'catatan' => 'Honor periode berjalan 2 sesi kehadiran',
+            ]);
+
+            \App\Models\PembayaranHonor::create([
+                'id_honor' => $honorAhmad->id_honor,
+                'tanggal_pembayaran' => now()->format('Y-m-d'),
+                'jumlah' => 200000,
+                'nomor_rekening' => 'BCA 5210987654',
+                'status' => 'Pending',
+                'keterangan' => 'Menunggu verifikasi transfer finance',
+            ]);
+        }
+
+        // Penilaian contoh
+        $admin = Petinggi::first();
+        if ($admin && $ahmad) {
+            \App\Models\Penilaian::create([
+                'id_tutor' => $ahmad->id_tutor,
+                'id_petinggi' => $admin->id_petinggi,
+                'tanggal_penilaian' => now()->subDays(2)->format('Y-m-d'),
+                'periode' => now()->format('F Y'),
+                'kualitas_mengajar' => 'Sangat baik, komunikasi jelas dan materi mudah dipahami siswa.',
+                'catatan_kinerja' => 'Disiplin dan selalu hadir 10 menit sebelum jadwal dimulai.',
+            ]);
         }
     }
 }
