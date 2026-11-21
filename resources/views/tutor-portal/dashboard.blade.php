@@ -13,10 +13,10 @@
                 Pengajar Aktif Houka GO
             </span>
             <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-2">
-                Halo, {{ $tutor->nama }}! 👋
+                Halo, {{ $tutor->nama }}!
             </h1>
             <p class="text-slate-300 text-sm leading-relaxed">
-                Pantau penugasan kelas bimbel Anda, lakukan presensi (check-in) kehadiran tepat waktu di sekolah mitra, dan tinjau akumulasi honorarium Anda bulan ini.
+                Semangat mengajar hari ini, terus berikan yang terbaik!
             </p>
         </div>
         <div class="absolute -right-8 -bottom-10 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>

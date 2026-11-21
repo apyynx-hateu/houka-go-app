@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Dashboard')
-<!-- @section('page_description', 'Ringkasan operasional dan metrik kinerja Houka GO') -->
+{{-- @section('page_description', 'Ringkasan operasional dan metrik kinerja Houka GO') --}}
 
 @section('content')
 @php
@@ -16,7 +16,7 @@
                 Selamat Datang, {{ $currentUser->jabatan ?? 'ADMIN' }}
             </span>
             <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-2">
-                Halo, {{ $currentUser->nama ?? 'Admin' }}! 
+                Halo, {{ $currentUser->nama ?? 'Admin' }}!
             </h1>
             <p class="text-slate-300 text-sm leading-relaxed">
                 Selamat datang di website Houka-Go. Kelola seluruh data dan aktivitas bisnis di satu tempat.
@@ -27,7 +27,7 @@
 
     <!-- Quick Stats Grid -->
     <div>
-        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 mb-4">Statistik Master & Operasional</h3>
+        {{-- <h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 mb-4">Statistik Master & Operasional</h3> --}}
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             <!-- Stat 1: Tutor -->
             <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
@@ -226,7 +226,7 @@
     </div>
 
     <!-- Quick Action Navigation -->
-    <div>
+    {{-- <div>
         <h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 mb-4">Aksi Cepat</h3>
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             <a href="{{ route('tutor.create') }}" class="p-4 rounded-xl bg-white border border-slate-200 hover:border-brand-500 hover:shadow-sm text-center transition-all group">
@@ -271,7 +271,7 @@
                 <span class="text-xs font-semibold text-slate-700 group-hover:text-brand-600 block">+ Bayar Honor</span>
             </a>
         </div>
-    </div>
+    </div> --}}
 
 </div>
 @endsection

@@ -51,22 +51,22 @@
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                     <label for="tarif_per_sesi" class="block text-xs font-semibold text-slate-700 mb-1.5">Tarif per Sesi (Rp)</label>
-                    <input type="number" id="tarif_per_sesi" name="tarif_per_sesi" value="{{ old('tarif_per_sesi', 50000) }}" min="0" step="1000"
+                    <input disabled type="number" id="tarif_per_sesi" name="tarif_per_sesi" value="{{ old('tarif_per_sesi', 50000) }}" min="0" step="1000"
                         class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500">
                 </div>
 
                 <div>
                     <label for="fee_check_in" class="block text-xs font-semibold text-slate-700 mb-1.5">Fee Check-in Total (Rp)</label>
-                    <input type="number" id="fee_check_in" name="fee_check_in" value="{{ old('fee_check_in') }}" min="0" step="1000"
+                    <input disabled type="number" id="fee_check_in" name="fee_check_in" value="{{ old('fee_check_in') }}" min="0" step="1000"
                         class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
-                        placeholder="Otomatis: Sesi × 20.000">
+                        placeholder="20.000">
                 </div>
 
                 <div>
                     <label for="fee_transport" class="block text-xs font-semibold text-slate-700 mb-1.5">Fee Transport Total (Rp)</label>
-                    <input type="number" id="fee_transport" name="fee_transport" value="{{ old('fee_transport') }}" min="0" step="1000"
+                    <input disabled type="number" id="fee_transport" name="fee_transport" value="{{ old('fee_transport') }}" min="0" step="1000"
                         class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
-                        placeholder="Otomatis: Sesi × 30.000">
+                        placeholder="30.000">
                 </div>
             </div>
 
@@ -86,10 +86,10 @@
                 </div>
             </div>
 
-            <div class="p-4 rounded-xl bg-amber-50/70 border border-amber-200/60 text-xs text-amber-800">
+            {{-- <div class="p-4 rounded-xl bg-amber-50/70 border border-amber-200/60 text-xs text-amber-800">
                 <strong class="font-semibold block mb-0.5">Rumus Perhitungan Honor Sesi:</strong>
                 <code>Total = (Jumlah Sesi &times; Tarif Rp50.000) + Fee Check-in + Fee Transport + Penyesuaian</code>
-            </div>
+            </div> --}}
 
             <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
                 <a href="{{ route('honor.index') }}" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors">

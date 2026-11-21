@@ -20,16 +20,16 @@
                     },
                     colors: {
                         brand: {
-                            50: '#eef2ff',
-                            100: '#e0e7ff',
-                            200: '#c7d2fe',
-                            300: '#a5b4fc',
-                            400: '#818cf8',
-                            500: '#6366f1',
-                            600: '#4f46e5',
-                            700: '#4338ca',
-                            800: '#3730a3',
-                            900: '#312e81',
+                            50: '#F4F6F1',
+                            100: '#E8EDE4',
+                            200: '#D1DCC9',
+                            300: '#AFC3A2',
+                            400: '#FAFCF8',
+                            500: '#F4F8EE',
+                            600: '#CFD7AA',
+                            700: '#9FBB6D',
+                            800: '#5A7C4B',
+                            900: '#2F5333',
                         }
                     }
                 }
@@ -51,16 +51,16 @@
     <div id="sidebarBackdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-40 hidden md:hidden transition-opacity"></div>
 
     <!-- Sidebar Navigation -->
-    <aside id="sidebar" class="fixed inset-y-0 left-0 w-64 bg-slate-900 text-white z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out flex flex-col border-r border-slate-800">
+    <aside id="sidebar" class="fixed inset-y-0 left-0 w-64 bg-brand-800 text-white z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out flex flex-col border-r border-slate-800">
         <!-- Brand / Logo -->
         <div class="p-6 border-b border-slate-800/80 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center shadow-lg shadow-teal-500/30 text-white font-extrabold text-lg">
+                <!-- <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center shadow-lg shadow-teal-500/30 text-white font-extrabold text-lg">
                     HT
-                </div>
+                </div> -->
                 <div>
-                    <h1 class="font-bold text-lg leading-tight tracking-wide text-white">Houka<span class="text-teal-400">Tutor</span></h1>
-                    <p class="text-[11px] text-slate-400 font-medium">Portal Pengajar Bimbel</p>
+                    <h1 class="font-bold text-2xl leading-tight tracking-wide text-white">Houka<span class="text-teal-400">Go</span></h1>
+                    <p class="text-sm text-slate-400 font-medium">Portal Pengajar Bimbel</p>
                 </div>
             </div>
             <button id="closeSidebar" class="md:hidden text-slate-400 hover:text-white p-1 rounded-lg">

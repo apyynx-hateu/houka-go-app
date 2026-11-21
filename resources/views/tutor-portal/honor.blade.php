@@ -40,7 +40,7 @@
     </div>
 
     <!-- Informational Note about the formula -->
-    <div class="p-4 rounded-2xl bg-teal-50 border border-teal-200/80 text-xs text-teal-900 flex items-start gap-3">
+    {{-- <div class="p-4 rounded-2xl bg-teal-50 border border-teal-200/80 text-xs text-teal-900 flex items-start gap-3">
         <svg class="w-5 h-5 text-teal-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         <div>
             <strong class="font-bold">Informasi Transparansi Rumus Honor Houka GO:</strong>
@@ -48,7 +48,7 @@
                 Honorarium dihitung berbasis sesi presensi: (Jumlah Sesi &times; Tarif Rp50.000) + Fee Check-in (Rp20.000/sesi) + Fee Transport (Rp30.000/sesi) + Penyesuaian.
             </p>
         </div>
-    </div>
+    </div> --}}
 
     <!-- Table -->
     <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
