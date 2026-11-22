@@ -10,10 +10,10 @@
 <div class="space-y-8">
 
     <!-- Welcome Banner -->
-    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-brand-900 via-indigo-900 to-slate-900 p-6 sm:p-8 text-white shadow-xl shadow-brand-900/10">
+    <div class="relative overflow-hidden rounded-2xl bg-brand-900 p-6 sm:p-8 text-white shadow-xl shadow-brand-900/10">
         <div class="relative z-10 max-w-2xl">
             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand-500/30 text-brand-200 border border-brand-400/30 mb-3">
-                Selamat Datang, {{ $currentUser->jabatan ?? 'ADMIN' }}
+                Selamat datang, {{ $currentUser->jabatan ?? 'ADMIN' }}
             </span>
             <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-2">
                 Halo, {{ $currentUser->nama ?? 'Admin' }}!

@@ -26,7 +26,7 @@
                     <option value="">-- Pilih Tutor --</option>
                     @foreach($tutors as $tutor)
                         <option value="{{ $tutor->id_tutor }}" {{ old('id_tutor', request('tutor')) == $tutor->id_tutor ? 'selected' : '' }}>
-                            {{ $tutor->nama }} ({{ $tutor->pendidikan_terakhir ?? 'Tutor' }})
+                            {{ $tutor->nama }} 
                         </option>
                     @endforeach
                 </select>

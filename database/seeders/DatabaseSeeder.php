@@ -14,35 +14,35 @@ class DatabaseSeeder extends Seeder
     {
         // Akun Petinggi (password di-hash)
         Petinggi::create([
-            'nama' => 'Admin Houka',
-            'username' => 'admin',
+            'nama' => 'Siti Mutmainah',
+            'username' => 'Mumut',
+            'password' => Hash::make('password'),
+            'jabatan' => 'Human Resource',
+            'status_aktif' => 'Aktif',
+        ]);
+
+        Petinggi::create([
+            'nama' => 'Fery Marulak',
+            'username' => 'Fery',
             'password' => Hash::make('password'),
             'jabatan' => 'CO Founder',
             'status_aktif' => 'Aktif',
         ]);
 
         Petinggi::create([
-            'nama' => 'Staff Operasional',
-            'username' => 'operasional',
+            'nama' => 'Ahmad Habib',
+            'username' => 'Habib',
             'password' => Hash::make('password'),
             'jabatan' => 'Operasional',
-            'status_aktif' => 'Aktif',
-        ]);
-
-        Petinggi::create([
-            'nama' => 'Staff HR',
-            'username' => 'hr',
-            'password' => Hash::make('password'),
-            'jabatan' => 'Human Resource',
             'status_aktif' => 'Aktif',
         ]);
 
         // Tutor contoh
         $tutors = [
             ['nama' => 'Ahmad Fauzi', 'username' => 'ahmad', 'password' => Hash::make('password'), 'jenis_kelamin' => 'Laki-laki', 'no_telepon' => '081234567890', 'email' => 'ahmad@email.com', 'pendidikan_terakhir' => 'S1 Matematika', 'status_kerja' => 'Aktif', 'tanggal_bergabung' => '2024-01-15'],
-            ['nama' => 'Siti Nurhaliza', 'username' => 'siti', 'password' => Hash::make('password'), 'jenis_kelamin' => 'Perempuan', 'no_telepon' => '081234567891', 'email' => 'siti@email.com', 'pendidikan_terakhir' => 'S1 Bahasa Inggris', 'status_kerja' => 'Aktif', 'tanggal_bergabung' => '2024-02-01'],
+            ['nama' => 'Siti Nurhaliza', 'username' => 'siti', 'password' => Hash::make('password'), 'jenis_kelamin' => 'Perempuan', 'no_telepon' => '081234567891', 'email' => 'siti@email.com', 'pendidikan_terakhir' => 'S1 Matematika', 'status_kerja' => 'Aktif', 'tanggal_bergabung' => '2024-02-01'],
             ['nama' => 'Budi Santoso', 'username' => 'budi', 'password' => Hash::make('password'), 'jenis_kelamin' => 'Laki-laki', 'no_telepon' => '081234567892', 'email' => 'budi@email.com', 'pendidikan_terakhir' => 'S1 Fisika', 'status_kerja' => 'Aktif', 'tanggal_bergabung' => '2024-03-10'],
-            ['nama' => 'Dewi Lestari', 'username' => 'dewi', 'password' => Hash::make('password'), 'jenis_kelamin' => 'Perempuan', 'no_telepon' => '081234567893', 'email' => 'dewi@email.com', 'pendidikan_terakhir' => 'S1 Biologi', 'status_kerja' => 'Tidak Aktif', 'tanggal_bergabung' => '2023-06-01'],
+            ['nama' => 'Dewi Lestari', 'username' => 'dewi', 'password' => Hash::make('password'), 'jenis_kelamin' => 'Perempuan', 'no_telepon' => '081234567893', 'email' => 'dewi@email.com', 'pendidikan_terakhir' => 'S1 Sistem Informasi', 'status_kerja' => 'Tidak Aktif', 'tanggal_bergabung' => '2023-06-01'],
         ];
 
         foreach ($tutors as $tutor) {
@@ -51,9 +51,9 @@ class DatabaseSeeder extends Seeder
 
         // Sekolah contoh
         $sekolahs = [
-            ['nama_sekolah' => 'SMA Negeri 1 Jakarta', 'alamat' => 'Jl. Budi Utomo No. 7, Jakarta Pusat', 'ruangan' => 'Ruang 101', 'kapasitas' => 30],
-            ['nama_sekolah' => 'SMP Harapan Bangsa', 'alamat' => 'Jl. Merdeka No. 10, Bandung', 'ruangan' => 'Ruang A1', 'kapasitas' => 25],
-            ['nama_sekolah' => 'SD Islam Terpadu', 'alamat' => 'Jl. Kebangsaan No. 5, Surabaya', 'ruangan' => 'Ruang B2', 'kapasitas' => 20],
+            ['nama_sekolah' => 'SDIT Cipta Insani', 'alamat' => 'Jl. Kalimulya No. 7, Depok', 'ruangan' => 'Ruang 1A', 'kapasitas' => 10],
+            ['nama_sekolah' => 'SD Harapan Bangsa', 'alamat' => 'Jl. Merdeka No. 10, Bekasi', 'ruangan' => 'Ruang 3C', 'kapasitas' => 8],
+            ['nama_sekolah' => 'SDIT Al Fikri', 'alamat' => 'Jl. Kebangsaan No. 5, Jakarta', 'ruangan' => 'Ruang 4A', 'kapasitas' => 5],
         ];
 
         foreach ($sekolahs as $sekolah) {

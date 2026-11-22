@@ -7,9 +7,9 @@
 <div class="space-y-8">
 
     <!-- Welcome Banner -->
-    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-teal-900 via-slate-900 to-indigo-950 p-6 sm:p-8 text-white shadow-xl shadow-teal-950/20">
+    <div class="relative overflow-hidden rounded-2xl bg-brand-900 p-6 sm:p-8 text-white">
         <div class="relative z-10 max-w-2xl">
-            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-teal-500/30 text-teal-200 border border-teal-400/30 mb-3">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand-500/30 text-brand-200 border border-brand-400/30 mb-3">
                 Pengajar Aktif Houka GO
             </span>
             <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-2">
@@ -19,7 +19,7 @@
                 Semangat mengajar hari ini, terus berikan yang terbaik!
             </p>
         </div>
-        <div class="absolute -right-8 -bottom-10 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -right-8 -bottom-10 w-64 h-64 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
     </div>
 
     <!-- Quick Stats Grid -->
@@ -45,11 +45,11 @@
             <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
                 <div class="flex items-center justify-between mb-3">
                     <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Presensi Hadir (Bulan Ini)</span>
-                    <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center">
+                    <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     </div>
                 </div>
-                <div class="text-2xl font-extrabold text-teal-600">{{ $absensiBulanIni }} <span class="text-xs font-medium text-slate-400">Sesi</span></div>
+                <div class="text-2xl font-extrabold text-brand-800">{{ $absensiBulanIni }} <span class="text-xs font-medium text-slate-400">Sesi</span></div>
                 <div class="text-xs text-slate-500 mt-2 flex items-center gap-1.5">
                     <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
                     Tervalidasi untuk honor
@@ -99,7 +99,7 @@
                         <h3 class="text-base font-bold text-slate-800">Penugasan Jadwal Mengajar</h3>
                         <p class="text-xs text-slate-400">Daftar kelas dan sekolah mitra yang ditugaskan kepada Anda</p>
                     </div>
-                    <a href="{{ route('tutor.schedules') }}" class="text-xs font-semibold text-teal-600 hover:text-teal-700">Lihat Semua &rarr;</a>
+                    <a href="{{ route('tutor.schedules') }}" class="text-xs font-semibold text-brand-800 hover:text-brand-700">Lihat Semua &rarr;</a>
                 </div>
 
                 @if($jadwalList->isEmpty())
@@ -109,10 +109,10 @@
                 @else
                     <div class="space-y-3">
                         @foreach($jadwalList as $jdw)
-                            <div class="p-4 rounded-xl border border-slate-100 hover:border-teal-200 hover:bg-teal-50/20 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div class="p-4 rounded-xl border border-slate-100 hover:border-brand-200 hover:bg-brand-50/20 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                                 <div class="flex items-start gap-3">
-                                    <div class="w-12 h-12 rounded-xl bg-teal-50 text-teal-700 font-bold flex flex-col items-center justify-center flex-shrink-0 text-center leading-none">
-                                        <span class="text-[10px] font-semibold uppercase text-teal-500">Hari</span>
+                                    <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-800 font-bold flex flex-col items-center justify-center flex-shrink-0 text-center leading-none">
+                                        <span class="text-[10px] font-semibold uppercase text-brand-800">Hari</span>
                                         <span class="text-sm font-extrabold mt-0.5">{{ $jdw->hari }}</span>
                                     </div>
                                     <div>
@@ -142,7 +142,7 @@
                         <h3 class="text-base font-bold text-slate-800">Riwayat Presensi Terbaru</h3>
                         <p class="text-xs text-slate-400">Catatan kehadiran mengajar Anda yang telah tersimpan</p>
                     </div>
-                    <a href="{{ route('tutor.attendance') }}" class="text-xs font-semibold text-teal-600 hover:text-teal-700">Buka Presensi &rarr;</a>
+                    <a href="{{ route('tutor.attendance') }}" class="text-xs font-semibold text-brand-800 hover:text-brand-700">Buka Presensi &rarr;</a>
                 </div>
 
                 @if($riwayatAbsensi->isEmpty())
@@ -184,9 +184,9 @@
         <div class="space-y-6">
 
             <!-- Check-in Cepat Form -->
-            <div class="bg-gradient-to-br from-teal-50 to-white rounded-2xl border border-teal-200 p-6 shadow-sm">
+            <div class="bg-gradient-to-br from-brand-50 to-white rounded-2xl border border-brand-200 p-6 shadow-sm">
                 <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 rounded-xl bg-teal-600 text-white flex items-center justify-center font-bold">
+                    <div class="w-10 h-10 rounded-xl bg-brand-800 text-white flex items-center justify-center font-bold">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     </div>
                     <div>
@@ -199,7 +199,7 @@
                     @csrf
                     <div>
                         <label for="checkin_jadwal" class="block text-xs font-semibold text-slate-700 mb-1">Pilih Sesi Jadwal</label>
-                        <select id="checkin_jadwal" name="id_jadwal" required class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 bg-white">
+                        <select id="checkin_jadwal" name="id_jadwal" required class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 bg-white">
                             <option value="">-- Pilih Jadwal Anda --</option>
                             @foreach($jadwalList as $j)
                                 <option value="{{ $j->id_jadwal }}">
@@ -211,15 +211,15 @@
 
                     <div>
                         <label for="checkin_tanggal" class="block text-xs font-semibold text-slate-700 mb-1">Tanggal Presensi</label>
-                        <input type="date" id="checkin_tanggal" name="tanggal" value="{{ date('Y-m-d') }}" required class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 bg-white">
+                        <input type="date" id="checkin_tanggal" name="tanggal" value="{{ date('Y-m-d') }}" required class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 bg-white">
                     </div>
 
                     <div>
                         <label for="checkin_keterangan" class="block text-xs font-semibold text-slate-700 mb-1">Materi / Catatan</label>
-                        <input type="text" id="checkin_keterangan" name="keterangan" placeholder="Contoh: Mengajar materi Bab 1..." class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 bg-white">
+                        <input type="text" id="checkin_keterangan" name="keterangan" placeholder="Contoh: Mengajar materi Bab 1..." class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 bg-white">
                     </div>
 
-                    <button type="submit" class="w-full mt-2 py-2.5 px-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs shadow-md shadow-teal-600/20 transition-all flex items-center justify-center gap-2">
+                    <button type="submit" class="w-full mt-2 py-2.5 px-4 rounded-xl bg-brand-800 hover:bg-brand-700 text-white font-semibold text-xs shadow-md shadow-brand-600/20 transition-all flex items-center justify-center gap-2">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                         Konfirmasi Check-in Sekarang
                     </button>
@@ -248,7 +248,7 @@
 
                         <div>
                             <span class="text-slate-400 block font-semibold mb-0.5">Kualitas Mengajar:</span>
-                            <p class="text-slate-700 bg-teal-50/40 p-2.5 rounded-lg border border-teal-100/60 leading-relaxed">
+                            <p class="text-slate-700 bg-brand-50/40 p-2.5 rounded-lg border border-brand-100/60 leading-relaxed">
                                 {{ $penilaianTerbaru->kualitas_mengajar ?? 'Belum ada catatan' }}
                             </p>
                         </div>

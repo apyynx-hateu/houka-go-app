@@ -21,7 +21,7 @@
         <!-- Slip Header -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-200 gap-4">
             <div>
-                <span class="text-xs font-bold uppercase tracking-wider text-teal-600">Houka GO &bull; Slip Honorarium Pengajar</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-brand-800">Houka GO &bull; Slip Honorarium Pengajar</span>
                 <h3 class="text-xl font-bold text-slate-800 mt-0.5">Periode: {{ \Carbon\Carbon::parse($honor->periode_bulan)->isoFormat('MMMM Y') }}</h3>
                 <p class="text-xs text-slate-400">Nomor Dokumen: #HN-{{ str_pad($honor->id_honor, 5, '0', STR_PAD_LEFT) }}</p>
             </div>
@@ -62,7 +62,7 @@
             <div class="space-y-2.5 text-xs">
                 <div class="flex justify-between py-1 text-slate-600">
                     <span>Jumlah Sesi Mengajar (Presensi Hadir)</span>
-                    <span class="font-bold text-teal-600">{{ $honor->jumlah_sesi }} Sesi</span>
+                    <span class="font-bold text-brand-800">{{ $honor->jumlah_sesi }} Sesi</span>
                 </div>
                 <div class="flex justify-between py-1 text-slate-600">
                     <span>Tarif per Sesi</span>
@@ -93,7 +93,7 @@
                 @endif
                 <div class="flex justify-between py-3 border-t border-slate-200 text-slate-900 font-extrabold text-base">
                     <span>Total Honor Diterima</span>
-                    <span class="text-teal-600">Rp {{ number_format($honor->total_honor, 0, ',', '.') }}</span>
+                    <span class="text-brand-800">Rp {{ number_format($honor->total_honor, 0, ',', '.') }}</span>
                 </div>
             </div>
         </div>

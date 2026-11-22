@@ -14,14 +14,14 @@
         </div>
 
         <form method="GET" action="{{ route('tutor.honors') }}" class="flex items-center gap-2">
-            <select name="status" class="px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 bg-white">
+            <select name="status" class="px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-1 focus:ring-brand-900/40 focus:border-brand-700 bg-white">
                 <option value="">Semua Status</option>
                 <option value="Belum Dibayar" {{ request('status') == 'Belum Dibayar' ? 'selected' : '' }}>Belum Dibayar</option>
                 <option value="Diproses" {{ request('status') == 'Diproses' ? 'selected' : '' }}>Diproses</option>
                 <option value="Dibayar" {{ request('status') == 'Dibayar' ? 'selected' : '' }}>Dibayar</option>
             </select>
 
-            <select name="tahun" class="px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 bg-white">
+            <select name="tahun" class="px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-1 focus:ring-brand-900/50 focus:border-brand-700 bg-white">
                 <option value="">Semua Tahun</option>
                 @foreach([date('Y'), date('Y') - 1, date('Y') - 2] as $thn)
                     <option value="{{ $thn }}" {{ request('tahun') == $thn ? 'selected' : '' }}>{{ $thn }}</option>
@@ -73,7 +73,7 @@
                             <td class="px-5 py-4 font-bold text-slate-800">
                                 {{ \Carbon\Carbon::parse($honor->periode_bulan)->isoFormat('MMMM Y') }}
                             </td>
-                            <td class="px-5 py-4 text-center font-bold text-teal-600">
+                            <td class="px-5 py-4 text-center font-bold text-brand-800">
                                 {{ $honor->jumlah_sesi }} Sesi
                             </td>
                             <td class="px-5 py-4 text-slate-600">
@@ -112,8 +112,8 @@
                                     </span>
                                 @endif
                             </td>
-                            <td class="px-5 py-4 text-right">
-                                <a href="{{ route('tutor.honors.show', $honor->id_honor) }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-teal-50 hover:bg-teal-100 text-teal-700 text-xs font-semibold transition-colors">
+                            <td class="px-5 py-4 text-center">
+                                <a href="{{ route('tutor.honors.show', $honor->id_honor) }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-brand-500 hover:bg-brand-100 text-brand-800 text-xs font-semibold transition-colors">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                                     Slip Rincian
                                 </a>
